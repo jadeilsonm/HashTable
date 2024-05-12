@@ -1,14 +1,23 @@
+import java.util.Collection;
+
 public class Main {
     public static void main(String[] args) {
 
-        HashTable<String, Integer> hashTable = new HashTable<>(10);
-        hashTable.put("A", 1);
-        hashTable.put("B", 2);
-        hashTable.put("C", 3);
-        hashTable.put("D", 4);
+        LRUCache<String, Integer> cache = new LRUCache<>(10);
 
-        System.out.println(hashTable.get("D"));
+        cache.put("a", 1);
+        cache.put("b", 2);
+        cache.put("c", 3);
+        cache.put("d", 4);
+        cache.put("e", 5);
+        cache.put("f", 6);
+        cache.put("g", 7);
+        cache.put("h", 8);
+        cache.put("i", 9);
+        cache.put("34", 10);
 
+        System.out.println(cache.get("i"));
+        cache.get("34");
 
     }
 }

@@ -22,6 +22,9 @@ public class HashTable<Key, Value> {
         int i = hash(key);
         for (KeyValue<Key, Value> kv : table[i]) {
             if (kv.key.equals(key)) {
+                if (kv.value != null) {
+                    var value = kv.value;
+                }
                 kv.value = val;
                 return;
             }
@@ -65,7 +68,20 @@ public class HashTable<Key, Value> {
         return size;
     }
 
-    private static class KeyValue<Key, Value> {
+    public Value getAndSynchronize(Key k) {
+        int i = hash(k);
+        Value result = null;
+        for (KeyValue<Key, Value> kv : table[i]) {
+            if (kv.key.equals(k)) {
+                result = kv.value;
+                table[i].remove(kv);
+                table[i].addFirst(kv);
+            }
+        }
+        return result;
+    }
+
+    public static class KeyValue<Key, Value> {
         Key key;
         Value value;
 
