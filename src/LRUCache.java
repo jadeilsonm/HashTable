@@ -22,4 +22,11 @@ public class LRUCache<key, value> {
     public void update(key k, value v) {
         this.hashTable.update(k, v);
     }
+
+    @Override
+    public String toString() {
+        return "LRUCache{" +
+                "hashTable=" + hashTable +
+                '}';
+    }
 }

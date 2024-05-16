@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class HashTable<Key, Value> {
@@ -41,6 +42,13 @@ public class HashTable<Key, Value> {
             }
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "HashTable{" +
+                "table=" + Arrays.toString(table) +
+                '}';
     }
 
     public void delete(Key key) {
@@ -88,6 +96,14 @@ public class HashTable<Key, Value> {
         public KeyValue(Key key, Value value) {
             this.key = key;
             this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return "KeyValue{" +
+                    "key=" + key +
+                    ", value=" + value +
+                    '}';
         }
     }
 }
