@@ -2,13 +2,13 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 public class HashTable<Key, Value> {
-    private Integer sizeMix = 10;
+    private Integer sizeMix;
     private LinkedList<KeyValue<Key, Value>>[] table;
     private Integer size;
 
-    public HashTable(int sizeMix) {
+    public HashTable(Integer sizeMix) {
         this.sizeMix = sizeMix;
-        size = 0;
+        size =  0;
         table = (LinkedList<KeyValue<Key, Value>>[]) new LinkedList[sizeMix];
         for (int i = 0; i < sizeMix; i++) {
             table[i] = new LinkedList<>();
@@ -30,18 +30,15 @@ public class HashTable<Key, Value> {
                 return;
             }
         }
-        table[i].add(new KeyValue<>(key, val));
+        if (table[i].size() >= 5) {
+            table[i].removeLast();
+        }
+        table[i].addFirst(new KeyValue<>(key, val));
         size++;
     }
 
     public Value get(Key key) {
-        int i = hash(key);
-        for (KeyValue<Key, Value> kv : table[i]) {
-            if (kv.key.equals(key)) {
-                return kv.value;
-            }
-        }
-        return null;
+        return getAndSynchronize(key);
     }
 
     @Override
@@ -70,23 +67,30 @@ public class HashTable<Key, Value> {
                 return;
             }
         }
+        getAndSynchronize(key);
     }
 
     public int size() {
         return size;
     }
 
-    public Value getAndSynchronize(Key k) {
+    private Value getAndSynchronize(Key k) {
         int i = hash(k);
-        Value result = null;
+        Value result = (Value) "Não existe";
         for (KeyValue<Key, Value> kv : table[i]) {
             if (kv.key.equals(k)) {
                 result = kv.value;
                 table[i].remove(kv);
                 table[i].addFirst(kv);
+                System.out.println(table[i]);
+                break;
             }
         }
         return result;
+    }
+
+    public LinkedList<KeyValue<Key, Value>>[] getTable() {
+        return table;
     }
 
     public static class KeyValue<Key, Value> {

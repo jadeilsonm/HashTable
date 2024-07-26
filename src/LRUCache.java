@@ -3,7 +3,7 @@ public class LRUCache<key, value> {
 
     private HashTable<key, value> hashTable;
 
-    public LRUCache(Integer capacity) {
+    public LRUCache(Integer capacity)  {
         this.hashTable = new HashTable<key, value>(capacity);
     }
 
@@ -12,7 +12,7 @@ public class LRUCache<key, value> {
     }
 
     public value get(key k) {
-        return hashTable.getAndSynchronize(k);
+        return hashTable.get(k);
     }
 
     public void delete(key k) {
@@ -29,4 +29,5 @@ public class LRUCache<key, value> {
                 "hashTable=" + hashTable +
                 '}';
     }
+
 }

@@ -1,23 +1,24 @@
-import java.util.Collection;
-
 public class Main {
     public static void main(String[] args) {
 
-        LRUCache<String, Integer> cache = new LRUCache<>(10);
+        LRUCache<String, String> cache = new LRUCache<>(10);
 
-        cache.put("a", 1);
-        cache.put("b", 2);
-        cache.put("c", 3);
-        cache.put("d", 4);
-        cache.put("e", 5);
-        cache.put("f", 6);
-        cache.put("g", 7);
-        cache.put("h", 8);
-        cache.put("i", 9);
-        cache.put("34", 10);
-
-        System.out.println(cache.get("i"));
-        cache.get("34");
-
+        cache.put("a", "Maria");
+        cache.put("b", "João");
+        cache.put("c", "Carlos");
+        cache.put("d", "Pedro");
+        cache.put("e", "Thiago");
+        cache.put("f", "Victor");
+        cache.put("z", "Lucas");
+        cache.put("h", "Gabriel");
+        cache.put("><", "Rafael");
+        cache.put("34", "Marcos");
+        cache.put(";?", "Miguel");
+        cache.put("34", "Joaquim");
+        System.out.println(cache.get("g"));
+        cache.put("==", "Jair");
+        cache.put("]    ", "Bill");
+        cache.put("34", "Lula");
+        System.out.println(cache.get(";?"));
     }
 }
